@@ -6,8 +6,8 @@ const gameModal = document.querySelector(".game-modal");
 const playAgainBtn = document.querySelector(".play-again");
 
 let currentWord;
-let wrongGuessCount = 0;
-let correctLetters = [];
+let wrongGuessCount;
+let correctLetters;
 const maxGuesses = 6;
 
 const initGame = (button, clickedLetter) => {
@@ -90,7 +90,7 @@ const wordList = [
     word: "arab",
     hint: "Payg'ambar Muhammad (s.a.v)ning millatlari nima bo'lgan?",
   },
-{
+  {
     word: "hoshimiy",
     hint: "Payg'ambar Muhammad (s.a.v) qaysi urug'dan bo'lgan?",
   },
@@ -108,26 +108,43 @@ const wordList = [
   },
 ];
 
-playAgainBtn.addEventListener("click", () => window.location.reload());
-
+const resetGame = () => {
+  wrongGuessCount = 0;
+  correctLetters = [];
+  wordDistplay.innerHTML = currentWord
+    .split("")
+    .map(() => '<li class="letter"></li>')
+    .join("");
+  gameModal.classList.remove("show");
+  hangmangImg.src = `img/hangman-${wrongGuessCount}.svg`;
+  guessesText.innerText = `${wrongGuessCount} / ${maxGuesses}`;
+  keyboard.querySelectorAll("button").forEach(btn => btn.disabled = false)
+};
 const getRandomWord = () => {
   const { word, hint } = wordList[Math.floor(Math.random() * wordList.length)];
   currentWord = word;
   document.querySelector(".hint-text b").innerText = hint;
-  wordDistplay.innerHTML = word
-    .split("")
-    .map(() => '<li class="letter"></li>')
-    .join("");
+  resetGame();
 };
 
 const gameOver = (isVictory) => {
-    setTimeout(() => {
-      const modalText = isVictory ? `Siz to'g'ri javobni topdingiz: ` : `To'g'ri javob: `;
-      gameModal.querySelector("img").src=`img/${isVictory ? 'victory' : 'lost'}.gif `
-      gameModal.querySelector("h4").innerText=`${isVictory ? 'Tabriklaymiz!' : 'Yutqazdingiz!'}`
-      gameModal.querySelector("p").innerHTML=`${modalText} <b>${currentWord}</b>`
-      gameModal.classList.add("show");
-    }, 300);
-  };
+  setTimeout(() => {
+    const modalText = isVictory
+      ? `Siz to'g'ri javobni topdingiz: `
+      : `To'g'ri javob: `;
+    gameModal.querySelector("img").src = `img/${
+      isVictory ? "victory" : "lost"
+    }.gif `;
+    gameModal.querySelector("h4").innerText = `${
+      isVictory ? "Tabriklaymiz!" : "Yutqazdingiz!"
+    }`;
+    gameModal.querySelector(
+      "p"
+    ).innerHTML = `${modalText} <b>${currentWord}</b>`;
+    gameModal.classList.add("show");
+  }, 300);
+};
 
 getRandomWord();
+
+playAgainBtn.addEventListener("click", getRandomWord);
