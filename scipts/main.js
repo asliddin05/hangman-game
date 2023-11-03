@@ -92,7 +92,7 @@ const wordList = [
   },
 {
     word: "hoshimiy",
-    hint: "Payg'ambar Muhammad (s.a.v) qaysi urug'dan bo'?",
+    hint: "Payg'ambar Muhammad (s.a.v) qaysi urug'dan bo'lgan?",
   },
   {
     word: "quraysh",
