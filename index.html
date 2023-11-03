@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stye.css">
+    <title>Hangman game</title>
+</head>
+<body>
+    <div class="game-modal">
+        <div class="content">
+            <img src="./img/lost.gif" alt="Lost gif">
+            <h4>Game Over!</h4>
+            <p><b></b></p>
+            <button class="play-again">Qayta o'ynang</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="hangman-box">
+            <img src="./img/hangman-0.svg" alt="Hangman">
+            <h1>Hangman O'yin</h1>
+        </div>
+        <div class="game-box">
+            <ul class="word-distplay">
+            </ul>
+            <h4 class="hint-text">
+                Savol:
+                <b></b>
+            </h4>
+            <h4 class="guesses-text">
+                Xatolar:
+                <b>0 / 6</b>
+            </h4>
+            <div class="keyboard"></div>
+        </div>
+    </div>
+
+
+    <script src="./scipts/main.js"></script>
+</body>
+</html>
+</html>
